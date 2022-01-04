@@ -17,7 +17,7 @@
         <script src="js/rangeslider.js"></script>
         <script src="js/imagePlayer.js"></script>
         <script src="js/datepicker.js"></script>
-        <script src="js/i18n/datepicker.de.js"></script>
+        <script src="js/i18n/datepicker.en.js"></script>
 
     </head>
     <body>
@@ -52,10 +52,10 @@
                    <div id="videoInfo" class="tilaMenuItem" onclick="downloadMovie()">info</div>
                 </div>                  
                 <div id="moreMenu" class="tilaMenu">
-                    <div class="tilaMenuItem" onclick="showDatePicker()"><span class="tilaIcons">calendar_today</span> Tag &auml;ndern<input id="tilaHiddenDate" type="text" style="display: none"></div>
-                    <div class="tilaMenuItem" onclick="showSpeedMenu()"><span class="tilaIcons">shutter_speed</span> Geschwindigkeit</div>
+                    <div class="tilaMenuItem" onclick="showDatePicker()"><span class="tilaIcons">calendar_today</span> Calendar<input id="tilaHiddenDate" type="text" style="display: none"></div>
+                    <div class="tilaMenuItem" onclick="showSpeedMenu()"><span class="tilaIcons">shutter_speed</span> Playback Speed</div>
                     <div class="tilaMenuItem" onclick="downloadCurrentPicture()"><span class="tilaIcons">file_download</span> Download</div>
-                    <div class="tilaMenuItem" onclick="showVideoMenu()"><span class="tilaIcons">videocam</span> Film erstellen</div>
+                    <div class="tilaMenuItem" onclick="showVideoMenu()"><span class="tilaIcons">videocam</span> Video</div>
                 </div>
                 <div id="speedMenu" class="tilaMenu" style="width: 100px">
                     <div class="tilaMenuItemSmall" onclick="setPlayerSpeed(0.25)">1/4</div>
@@ -66,10 +66,10 @@
                     <div class="tilaMenuItemSmall" onclick="setPlayerSpeed(8)">8x</div>
                 </div>
                 <div id="videoMenu" class="tilaMenu" style="width: 150px">
-                    <div class="tilaMenuItem" onclick="createVideo('day')">ein Tag</div>
-                    <div class="tilaMenuItem" onclick="createVideo('week')">eine Woche</div>
-                    <div class="tilaMenuItem" onclick="createVideo('month')">ein Monat</div>
-                    <div class="tilaMenuItem" onclick="createVideo('all')">Gesamt</div>
+                    <div class="tilaMenuItem" onclick="createVideo('day')">Day</div>
+                    <div class="tilaMenuItem" onclick="createVideo('week')">Week</div>
+                    <div class="tilaMenuItem" onclick="createVideo('month')">Month</div>
+                    <div class="tilaMenuItem" onclick="createVideo('all')">All</div>
                 </div>                
 
                 <div id="datepicker-inline" class=""></div>

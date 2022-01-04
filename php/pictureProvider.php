@@ -97,9 +97,9 @@ class PictureProvider
 
   function getPictureDir(){
     Global $config_pictureDir;
-
+    
     $instalDir = $_SERVER['DOCUMENT_ROOT'];
-    $pictureDir = $instalDir."".$config_pictureDir;
+	if (array_key_exists('ppath',$_REQUEST)) { $pictureDir = $instalDir."".$_REQUEST["ppath"];} else if ($ppath) { $pictureDir = $instalDir."".$ppath;} else {$pictureDir = $instalDir."".$config_pictureDir;}
     return $pictureDir;
   }
   
@@ -108,7 +108,10 @@ class PictureProvider
         $protocol = "https://";
     } else {
         $protocol = "http://";
-    } 
+    }
+	if(!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+		$protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
+	}
     return $protocol;
   }
 

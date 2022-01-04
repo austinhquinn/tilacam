@@ -13,6 +13,7 @@ $pp = new PictureProvider();
 //always get all pictures (could be optimized with a cache)
 $allPictures = $pp->getAllPictures();
 // debug
+DebugMessage("path: ".$pp->getPictureDir());
 DebugMessage("Picture count ".count($allPictures));
 DebugMessage("Days count ".count($pp->getAvailableDays()));
 DebugMessage("First Picture to display ".$pp->getFirstPicture()->webPath);
@@ -22,7 +23,9 @@ DebugMessage($_REQUEST);
 //initialization in global scope to avoid errors
 $action="";
 $day="";
-
+$ppath='';
+if(array_key_exists('ppath',$_REQUEST))
+  $ppath = strip_tags($_REQUEST['ppath']);
 if(array_key_exists('action',$_REQUEST))
   $action = strip_tags($_REQUEST['action']);
 if(array_key_exists('day',$_REQUEST))

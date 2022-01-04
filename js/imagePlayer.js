@@ -17,8 +17,8 @@ var started = false;
 var globalSlider = 0;
 var timer = null;
 var firstImage;
-var picturesWidth = 1920;
-var picturesHeight = 1080;
+var picturesWidth = 1280;
+var picturesHeight = 720;
 
 var imageBuffer = [];
 var imageBufferMaxSize = 25;
@@ -29,13 +29,15 @@ var isFullscreen = false;
 var tilaDatePicker;
 
 var opc = 0;
-var monthsShort = ['Jan', 'Feb', 'M&auml;r', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+var monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var movieURI ="";
 var embeddedDiv;
 var isEmbedded;
 
 var autoResizeImage=true;
 
+const params = new URLSearchParams(window.location.search);
+var ppath = (params.has('ppath') && params.get('ppath') ) || "/California/laoverview.stream";
 function fillImageCache() {
     for(var i=0;i<imageBufferSize;i++){        
         cacheImage(currentCacheNo+i);     
@@ -54,7 +56,7 @@ function cacheImage(imageNo){
 
 
 function displayFirstPicture() {
-    $.getJSON(serviceAddress, {action: "getFirstPicture"})
+    $.getJSON(serviceAddress, {"action": "getFirstPicture","ppath": ppath})
             .done(function (json) {
                 console.log("JSON FirstPicture: " + json.webPath);
                 firstImage = new Image();
@@ -100,7 +102,7 @@ function getPicturesForCurrentDay() {
     dayPictures = [];
     
     var day = days[currentDay];
-    $.getJSON(serviceAddress, {action: "getPicturesForDay", day: day})
+    $.getJSON(serviceAddress, {"action": "getPicturesForDay", "day": day, "ppath":ppath})
             .done(function (json) {
                 console.log("JSON getPicturesForDay: " + day);
                 $.each(json, function (key, val) {
@@ -338,7 +340,7 @@ function createVideo(createMode){
     movieURI = "";
     hideSubMenu();
     $("#videoInfoContainer").addClass('tilaMenuShow');    
-    $("#videoInfo").text("Film wird erstelt...");
+    $("#videoInfo").text("Video Created...");
     var day = days[currentDay];
     console.log('Create Video: '+createMode+' enddate: '+day+'')
     //ajax call to php file that creates the video and returns the filename
@@ -346,7 +348,7 @@ function createVideo(createMode){
     .done(function( data ) {
         movieURI = data;
         console.log('Create Video finished: '+data);
-        $("#videoInfo").text("Film ansehen");
+        $("#videoInfo").text("Video Download");
     });  
 }
 
@@ -600,10 +602,10 @@ function buildTilacamPlayer(){
                    <div id="videoInfo" class="tilaMenuItem" onclick="downloadMovie()">info</div>
                 </div>                  
                 <div id="moreMenu" class="tilaMenu">
-                    <div class="tilaMenuItem" onclick="showDatePicker()"><span class="tilaIcons">calendar_today</span> Tag &auml;ndern<input id="tilaHiddenDate" type="text" style="display: none"></div>
-                    <div class="tilaMenuItem" onclick="showSpeedMenu()"><span class="tilaIcons">shutter_speed</span> Geschwindigkeit</div>
+                    <div class="tilaMenuItem" onclick="showDatePicker()"><span class="tilaIcons">calendar_today</span> Calendar<input id="tilaHiddenDate" type="text" style="display: none"></div>
+                    <div class="tilaMenuItem" onclick="showSpeedMenu()"><span class="tilaIcons">shutter_speed</span> Playback Speed</div>
                     <div class="tilaMenuItem" onclick="downloadCurrentPicture()"><span class="tilaIcons">file_download</span> Download</div>
-                    <div class="tilaMenuItem" onclick="showVideoMenu()"><span class="tilaIcons">videocam</span> Film erstellen</div>
+                    <div class="tilaMenuItem" onclick="showVideoMenu()"><span class="tilaIcons">videocam</span> Video</div>
                 </div>
                 <div id="speedMenu" class="tilaMenu" style="width: 100px">
                     <div class="tilaMenuItemSmall" onclick="setPlayerSpeed(0.25)">1/4</div>
@@ -614,10 +616,10 @@ function buildTilacamPlayer(){
                     <div class="tilaMenuItemSmall" onclick="setPlayerSpeed(8)">8x</div>
                 </div>
                 <div id="videoMenu" class="tilaMenu" style="width: 150px">
-                    <div class="tilaMenuItem" onclick="createVideo('day')">ein Tag</div>
-                    <div class="tilaMenuItem" onclick="createVideo('week')">eine Woche</div>
-                    <div class="tilaMenuItem" onclick="createVideo('month')">ein Monat</div>
-                    <div class="tilaMenuItem" onclick="createVideo('all')">Gesamt</div>
+                    <div class="tilaMenuItem" onclick="createVideo('day')">Day</div>
+                    <div class="tilaMenuItem" onclick="createVideo('week')">Week</div>
+                    <div class="tilaMenuItem" onclick="createVideo('month')">Month</div>
+                    <div class="tilaMenuItem" onclick="createVideo('all')">All</div>
                 </div>                
 
                 <div id="datepicker-inline" class=""></div>
