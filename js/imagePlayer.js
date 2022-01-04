@@ -243,7 +243,7 @@ function showDatePicker() {
     console.log('Set Datepicker to current Day: ' + currentDate.toString());
     if (tilaDatePicker === undefined) {
         tilaDatePicker = $("#tilaHiddenDate").datepicker({
-            language: 'de',
+            language: 'en',
             startDate: currentDate,
             onRenderCell: function (date, cellType) {
                 //console.log('Render '+date.toString()+" cell "+cellType.toString());
@@ -432,7 +432,7 @@ function initSlider() {
             var pictureDate = dayPictures[currentPicture].formatedDateTime;
             var pd = parseDate(pictureDate);
             var dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-            var dateText = pd.toLocaleDateString("de", dateOptions);
+            var dateText = pd.toLocaleDateString("en", dateOptions);
             $("#pictureInfo").text(dateText + ' ' + timeText + ' / ' + totalText);
         },
 
